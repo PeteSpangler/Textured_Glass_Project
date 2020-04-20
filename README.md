@@ -1,5 +1,4 @@
-# Welcome to GitHub Desktop!
+This project is called Textured Glass.
 
-This is your README. READMEs are where you can communicate what your project is and how to use it.
-
-Write your name on line 6, save it, and then head back to GitHub Desktop.
+It is an image manipulation program that will segment and flip slices of an image.
+This is my first coding project and it uses Python, OpenCV, and Numpy
