@@ -17,8 +17,6 @@ cv.destroyAllWindows()
 imageHeight, imageWidth, _ = img.shape
 print('width:  ', imageWidth)
 print('height: ', imageHeight)
-print("total number of pixels: ", img.size)
-print("These are the numbers to play with: ", img.shape)
 leftmostSegment = img[:1200, :300]
 centerSegment = img[:1200, 300:599]
 rightmostSegment = img[:1200, 600:900]
@@ -27,13 +25,12 @@ rightmostSegment = img[:1200, 600:900]
 # 1) copy the rightmost third of the source into the leftmost third of the destination, 2) copy the center into the center, 
 # and 3) copy the leftmost third of the source into the rightmost third of the destination.
 # Step 4: display the modified image.
-# # img[:1200, :300] = px3
 rialto3 = cv.hconcat([cv.hconcat([rightmostSegment, centerSegment]), leftmostSegment])
 cv.imshow("DUDE", rialto3)
 cv.waitKey(0)
 cv.destroyAllWindows()
 
-def calculateSegments(numberOfSegments, width):
+def calculateVSegments(numberOfSegments, width):
     segments = []
     segmentWidth = int(width / numberOfSegments)
     for s in range(numberOfSegments):
@@ -41,8 +38,8 @@ def calculateSegments(numberOfSegments, width):
     print (segments)
     return segments
 
-def translate(segmentCount, img):
-    segments = calculateSegments(segmentCount, imageWidth)
+def vtranslate(segmentCount, img):
+    segments = calculateVSegments(segmentCount, imageWidth)
     copyImage = np.copy(img)
     for segment in range(int(segmentCount / 2) + 1):
         if segment % 2 != 0:
@@ -53,10 +50,37 @@ def translate(segmentCount, img):
         copyImage[:imageHeight, segments[rightSegment][0]:segments[rightSegment][1]] = img[:imageHeight, segments[leftSegment][0]:segments[leftSegment][1]]
     return copyImage
 
-translatedImage = translate(5, img)
+translatedImage = vtranslate(4, img)
 cv.imshow("BRO", translatedImage)
 cv.waitKey(0)
 cv.destroyAllWindows()
+
+def calculateHSegments(numberOfSegments, height):
+    hsegments = []
+    segmentHeight = int(height / numberOfSegments)
+    for j in range(numberOfSegments):
+        hsegments.append((segmentHeight * j, (segmentHeight * (j + 1)) - 1))
+    print (hsegments)
+    return hsegments
+
+def htranslate(segmentCount, img):
+    hsegments = calculateHSegments(segmentCount, imageHeight)
+    copyImage2 = np.copy(img)
+    for hsegment in range(int(segmentCount / 2) + 1):
+        if hsegment % 2 != 0:
+            continue
+        bottomsegment = hsegment
+        topsegment = segmentCount - 1 - hsegment
+        copyImage2[hsegments[bottomsegment][0]:hsegments[bottomsegment][1], :imageWidth] = img[hsegments[topsegment][0]:hsegments[topsegment][1], :imageWidth]
+        copyImage2[hsegments[topsegment][0]:hsegments[topsegment][1], :imageWidth] = img[hsegments[bottomsegment][0]:hsegments[bottomsegment][1], :imageWidth]
+    return copyImage2
+
+translatedImage2 = htranslate(7, img)
+(cv.imshow("Bruv", translatedImage2))
+cv.waitKey(0)
+cv.destroyAllWindows()
+
+
 
 # Step 5: generalize the function to take a number (such as 3) and the image, and do that amount of horizontal cuts with translation. 
 # Validate that the number is >= 3, and the number is < N/2, where N is the number of columns in the shape of the image. 
