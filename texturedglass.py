@@ -17,18 +17,18 @@ cv.destroyAllWindows()
 imageHeight, imageWidth, _ = img.shape
 print('width:  ', imageWidth)
 print('height: ', imageHeight)
-leftmostSegment = img[:1200, :300]
-centerSegment = img[:1200, 300:599]
-rightmostSegment = img[:1200, 600:900]
+# leftmostSegment = img[:1200, :300]
+# centerSegment = img[:1200, 300:599]
+# rightmostSegment = img[:1200, 600:900]
 # Chapter 2: translation function
 # Step 3: create a copy of the image with the same shape, and copy the source image into the destination image in three steps: 
 # 1) copy the rightmost third of the source into the leftmost third of the destination, 2) copy the center into the center, 
 # and 3) copy the leftmost third of the source into the rightmost third of the destination.
 # Step 4: display the modified image.
-rialto3 = cv.hconcat([cv.hconcat([rightmostSegment, centerSegment]), leftmostSegment])
-cv.imshow("DUDE", rialto3)
-cv.waitKey(0)
-cv.destroyAllWindows()
+# rialto3 = cv.hconcat([cv.hconcat([rightmostSegment, centerSegment]), leftmostSegment])
+# cv.imshow("DUDE", rialto3)
+# cv.waitKey(0)
+# cv.destroyAllWindows()
 
 def calculateVSegments(numberOfSegments, width):
     segments = []
@@ -50,7 +50,7 @@ def vtranslate(segmentCount, img):
         copyImage[:imageHeight, segments[rightSegment][0]:segments[rightSegment][1]] = img[:imageHeight, segments[leftSegment][0]:segments[leftSegment][1]]
     return copyImage
 
-translatedImage = vtranslate(4, img)
+translatedImage = vtranslate(25, img)
 cv.imshow("BRO", translatedImage)
 cv.waitKey(0)
 cv.destroyAllWindows()
@@ -75,7 +75,7 @@ def htranslate(segmentCount, img):
         copyImage2[hsegments[topsegment][0]:hsegments[topsegment][1], :imageWidth] = img[hsegments[bottomsegment][0]:hsegments[bottomsegment][1], :imageWidth]
     return copyImage2
 
-translatedImage2 = htranslate(7, img)
+translatedImage2 = htranslate(25, img)
 (cv.imshow("Bruv", translatedImage2))
 cv.waitKey(0)
 cv.destroyAllWindows()
@@ -89,6 +89,12 @@ cv.destroyAllWindows()
 # image with columns [1,2,3,4,5] will end up [5,2,3,4,1], image with columns [1,2,3,4,5,6] will end up [6,2,4,3,5,1], and so on.
 # Step 6: call the function with parameters 3 and image, and show the result, it should be the same as in step 4.
 # Step 7: call the function with parameters 6 and image, and see that the result this as expected.
+
+
+rotateimage = np.rot90(img, 2)
+cv.imshow("Rotate", rotateimage)
+cv.waitKey(0)
+cv.destroyAllWindows()
 
 # Chapter 3: rotation function
 # Step 8: create a copy of the image with the same shape, and copy the source image into the destination image in two steps: 1) copy the image as is, and 
