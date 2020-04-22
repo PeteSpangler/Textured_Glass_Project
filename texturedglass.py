@@ -49,6 +49,7 @@ def vtranslate(segmentCount, img):
         copyImage[:imageHeight, segments[rightSegment][0]:segments[rightSegment][1]] = img[:imageHeight, segments[leftSegment][0]:segments[leftSegment][1]]
     return copyImage
 
+# Vertical translation
 translatedImage = vtranslate(10, img)
 cv.imshow("BRO", translatedImage)
 cv.waitKey(0)
@@ -79,7 +80,7 @@ def htranslate(segmentCount, img):
         copyImage2[hsegments[bottomsegment][0]:hsegments[bottomsegment][1], :imageWidth] = img[hsegments[topsegment][0]:hsegments[topsegment][1], :imageWidth]
         copyImage2[hsegments[topsegment][0]:hsegments[topsegment][1], :imageWidth] = img[hsegments[bottomsegment][0]:hsegments[bottomsegment][1], :imageWidth]
     return copyImage2
-
+# Horizontal Translation
 translatedImage2 = htranslate(10, img)
 (cv.imshow("Bruv", translatedImage2))
 cv.waitKey(0)
@@ -107,7 +108,7 @@ def vflipud(segmentCount, img):
         vflipudimage[:imageHeight, segments[leftSegment][0]:segments[leftSegment][1]] = img[:imageHeight, segments[rightSegment][0]:segments[rightSegment][1]]
         vflipudimage[:imageHeight, segments[rightSegment][0]:segments[rightSegment][1]] = img[:imageHeight, segments[leftSegment][0]:segments[leftSegment][1]]
     return vflipudimage
-
+#Upside Down Flipped Image
 flippedandchopped = vflipud(5, img)
 (cv.imshow("quoi", flippedandchopped))
 cv.waitKey(0)
@@ -125,7 +126,7 @@ def hflip(segmentCount, img):
         hflipimage[hsegments[topsegment][0]:hsegments[topsegment][1], :imageWidth] = img[hsegments[bottomsegment][0]:hsegments[bottomsegment][1], :imageWidth]
     return hflipimage
 
-
+# Left to Right flipped image
 flipimage = hflip(5, img)
 cv.imshow("Flipped", flipimage)
 cv.waitKey(0)
@@ -135,8 +136,16 @@ cv.destroyAllWindows()
 # Step 13: load an image from a file and combine a call to the translation function with a call to the rotation function. Rotate 3 times and translate 5.
 # Step 14: show the resulting image.
 # Step 15: profit!
-FinalImage = vflipud(5, (vtranslate(5, img)))
-cv.imshow("Final", FinalImage)
+
+#Flipped and translated vertically
+FinalImageUD = vflipud(3, (vtranslate(5, img)))
+cv.imshow("Final", FinalImageUD)
+cv.waitKey(0)
+cv.destroyAllWindows()
+
+#Flipped and translated horizontally
+FinalImageLR = hflip(3, (htranslate(5, img)))
+cv.imshow("Final", FinalImageLR)
 cv.waitKey(0)
 cv.destroyAllWindows()
 # Shoot me with any questions, I expect many.
