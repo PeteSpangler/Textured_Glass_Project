@@ -148,6 +148,8 @@ FinalImageLR = hflip(3, (htranslate(5, img)))
 cv.imshow("Final", FinalImageLR)
 cv.waitKey(0)
 cv.destroyAllWindows()
+
+
 # Shoot me with any questions, I expect many.
 
 # def translateDavid(inputImage, segmentCount):
