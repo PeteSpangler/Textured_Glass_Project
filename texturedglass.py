@@ -4,7 +4,7 @@
 import numpy as np
 import cv2 as cv
 
-img = cv.imread('Rialto.jpg')
+img = cv.imread('static/Rialto.jpg')
 cv.namedWindow('Rialto', cv.WINDOW_NORMAL)
 cv.imshow('Rialto', img)
 cv.waitKey(0)

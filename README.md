@@ -1,4 +1,4 @@
-This project is called Textured Glass.
+This application is called Textured Glass.
 
 It is an image manipulation program that will segment and flip slices of an image.
-This is my first coding project and it uses Python, OpenCV, and Numpy
+It uses Python, OpenCV, and Numpy to maniupulate the image, it is hosted on Flask.
