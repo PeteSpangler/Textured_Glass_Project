@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request
-import numpy as np
-import cv2 as cv
+
 
 app = Flask(__name__, template_folder='./templates', static_folder='./static')
 
